@@ -27,7 +27,7 @@ export const Container = styled.div`
       border-width: 6px 6px 0 6px;
       top: 100%;
       position: absolute;
-      left: 50%;
+      left: 6%;
       transform: translateX(-50%);
     }
   }

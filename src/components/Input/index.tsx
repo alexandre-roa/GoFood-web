@@ -28,14 +28,21 @@ const Input: React.FC<IInputProps> = ({
   const [isFielled, setIsFielled] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  const [labelIsFielled, setLabelIsFielled] = useState(false);
+  const [labelIsFocused, setLabelIsFocused] = useState(false);
+
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
+    setLabelIsFocused(true);
   }, []);
 
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
 
+    setLabelIsFocused(false);
+
     setIsFielled(!!inputRef.current?.value);
+    setLabelIsFielled(!!inputRef.current?.value);
   }, []);
 
   const { fieldName, registerField, error } = useField(name);
@@ -51,7 +58,11 @@ const Input: React.FC<IInputProps> = ({
   return (
     <Container isErrored={!!error} isFocused={isFocused} isFielled={isFielled}>
       {Icon && <Icon size={20} />}
-      <Label>
+      <Label
+        labelIsFocused={labelIsFocused}
+        labelIsFielled={labelIsFielled}
+        labelIsErrored={!!error}
+      >
         <input
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}

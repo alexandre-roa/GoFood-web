@@ -7,6 +7,12 @@ interface IContainerProps {
   isErrored: boolean;
 }
 
+interface ILabelProps {
+  labelIsFocused: boolean;
+  labelIsFielled: boolean;
+  labelIsErrored: boolean;
+}
+
 export const Container = styled.div<IContainerProps>`
   position: relative;
   background: #f4ede8;
@@ -34,18 +40,12 @@ export const Container = styled.div<IContainerProps>`
     css`
       color: #ff872c;
       border-color: #ffb84d;
-      span {
-        transform: scale(0.6) translateY(-10px);
-      }
     `}
 
   ${props =>
     props.isFielled &&
     css`
       color: #ff872c;
-      span {
-        transform: scale(0.6) translateY(-10px);
-      }
     `}
 
   input {
@@ -64,7 +64,7 @@ export const Container = styled.div<IContainerProps>`
   }
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<ILabelProps>`
   span {
     color: #666360;
     height: 57px;
@@ -81,6 +81,25 @@ export const Label = styled.label`
     font-weight: 300;
 
     transition: 0.2s ease-in-out;
+
+    ${props =>
+      props.labelIsFocused &&
+      css`
+        transform: scale(0.6) translateY(-15px);
+      `}
+
+    ${props =>
+      props.labelIsFielled &&
+      css`
+        transform: scale(0.6) translateY(-15px);
+      `}
+
+
+  ${props =>
+      props.labelIsErrored &&
+      css`
+        transform: scale(0.6) translateY(-15px);
+      `}
   }
 `;
 
