@@ -1,5 +1,5 @@
-import React, { useCallback, useRef } from 'react';
-import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
+import { FiArrowLeft, FiMail, FiUser, FiLock, FiTag } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -14,6 +14,7 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import logoImg from '../../assets/gofood_home_logo.png';
 
 import Input from '../../components/Input';
+import SelectInput from '../../components/SelectInput';
 import Button from '../../components/Button';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
@@ -21,6 +22,7 @@ import { Container, Content, AnimationContainer, Background } from './styles';
 interface ISignUpFormData {
   name: string;
   email: string;
+  restaurant_category: string;
   password: string;
 }
 
@@ -39,6 +41,7 @@ const SignUp: React.FC = () => {
           email: Yup.string()
             .required('E-mail obrigatório')
             .email('Digite um e-mail válido'),
+          restaurant_category: Yup.string().required('Selecione uma categoria'),
           password: Yup.string().min(6, 'No mínimo 6 dígitos'),
         });
 
@@ -46,14 +49,14 @@ const SignUp: React.FC = () => {
           abortEarly: false,
         });
 
-        await api.post('/users', data);
+        await api.post('/restaurants', data);
 
         history.push('/');
 
         addToast({
           type: 'success',
           title: 'Cadastro realizado!',
-          description: 'Você já pode fazer seu logon no GoBarber!',
+          description: 'Você já pode fazer seu logon no GoFood!',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -87,6 +90,7 @@ const SignUp: React.FC = () => {
 
             <Input name="name" icon={FiUser} labelName="Nome" />
             <Input name="email" icon={FiMail} labelName="E-mail" />
+            <SelectInput name="restaurant_category" icon={FiTag} />
             <Input
               name="password"
               icon={FiLock}
