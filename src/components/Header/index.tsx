@@ -21,7 +21,7 @@ const Header: React.FC<IHeaderProps> = ({ openModal, restaurantName }) => {
         <nav>
           <div>
             <button type="button" onClick={() => openModal()}>
-              <div className="text">Novo Prato</div>
+              <div className="text">Criar Categoria</div>
               <div className="icon">
                 <FiPlusSquare size={24} />
               </div>

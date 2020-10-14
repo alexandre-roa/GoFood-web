@@ -10,7 +10,7 @@ import Input from '../Input';
 interface IFoodPlate {
   id: number;
   name: string;
-  image: string;
+  image_url: string;
   price: string;
   description: string;
   available: boolean;
@@ -25,7 +25,7 @@ interface IModalProps {
 
 interface IEditFoodData {
   name: string;
-  image: string;
+  image_url: string;
   price: string;
   description: string;
 }

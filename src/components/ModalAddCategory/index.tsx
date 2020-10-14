@@ -7,55 +7,49 @@ import { Form } from './styles';
 import Modal from '../Modal';
 import Input from '../Input';
 
-interface IFoodPlate {
-  id: number;
-  name: string;
-  image_url: string;
-  price: string;
-  description: string;
+interface ICategory {
+  id: string;
+  title: string;
+  restaurant_id: string;
   available: boolean;
+  image_url: string;
 }
 
-interface ICreateFoodData {
-  name: string;
+interface ICreateCategory {
+  title: string;
+  available: boolean;
   image_url: string;
-  price: string;
-  description: string;
 }
 
 interface IModalProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleAddFood: (food: Omit<IFoodPlate, 'id' | 'available'>) => void;
+  handleAddCategory: (food: Omit<ICategory, 'id' | 'restaurant_id'>) => void;
 }
 
-const ModalAddFood: React.FC<IModalProps> = ({
+const ModalAddCategory: React.FC<IModalProps> = ({
   isOpen,
   setIsOpen,
-  handleAddFood,
+  handleAddCategory,
 }) => {
   const formRef = useRef<FormHandles>(null);
 
   const handleSubmit = useCallback(
-    async (data: ICreateFoodData) => {
-      handleAddFood(data);
+    async (data: ICreateCategory) => {
+      handleAddCategory(data);
       setIsOpen();
     },
-    [handleAddFood, setIsOpen],
+    [handleAddCategory, setIsOpen],
   );
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Novo Prato</h1>
-        <Input name="image" icon={FiClipboard} labelName="Cole o link aqui" />
-
-        <Input name="name" icon={FiTag} labelName="Ex: Moda Italiana" />
-        <Input name="price" icon={FiDollarSign} labelName="Ex: 19.90" />
-
-        <Input name="description" icon={FiAlignLeft} labelName="Descrição" />
+        <h1>Criar Categoria</h1>
+        <Input name="title" icon={FiTag} labelName="Nome da Categoria" />
+        <Input name="image_url" icon={FiTag} labelName="Link da imagem" />
         <button type="submit" data-testid="add-food-button">
-          <p className="text">Adicionar Prato</p>
+          <p className="text">Adicionar Categoria</p>
           <div className="icon">
             <FiCheckSquare size={24} />
           </div>
@@ -65,4 +59,4 @@ const ModalAddFood: React.FC<IModalProps> = ({
   );
 };
 
-export default ModalAddFood;
+export default ModalAddCategory;
