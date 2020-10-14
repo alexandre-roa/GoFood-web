@@ -12,8 +12,19 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
 
+    h1 {
+      color: #fff;
+
+      strong {
+        color: #ffb84d;
+      }
+    }
+
     nav {
+      display: flex;
+      align-items: center;
       div {
+        padding: 0 56px 0;
         button {
           font-weight: 600;
           border-radius: 8px;
@@ -36,6 +47,17 @@ export const Container = styled.div`
             border-radius: 0 8px 8px 0;
             margin: 0 auto;
           }
+        }
+      }
+      button {
+        margin-left: auto;
+        background: transparent;
+        border: 0;
+
+        svg {
+          color: #fff;
+          width: 25px;
+          height: 25px;
         }
       }
     }

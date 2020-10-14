@@ -1,30 +1,39 @@
 import React from 'react';
 
-import { FiPlusSquare } from 'react-icons/fi';
+import { FiPlusSquare, FiPower } from 'react-icons/fi';
+import { useAuth } from '../../hooks/auth';
 import { Container } from './styles';
-
-import Logo from '../../assets/logo.svg';
 
 interface IHeaderProps {
   openModal: () => void;
+  restaurantName: string;
 }
 
-const Header: React.FC<IHeaderProps> = ({ openModal }) => (
-  <Container>
-    <header>
-      <img src={Logo} alt="GoRestaurant" />
-      <nav>
-        <div>
-          <button type="button" onClick={() => openModal()}>
-            <div className="text">Novo Prato</div>
-            <div className="icon">
-              <FiPlusSquare size={24} />
-            </div>
+const Header: React.FC<IHeaderProps> = ({ openModal, restaurantName }) => {
+  const { signOut } = useAuth();
+
+  return (
+    <Container>
+      <header>
+        <h1>
+          Bem vindo, <strong>{restaurantName}</strong>
+        </h1>
+        <nav>
+          <div>
+            <button type="button" onClick={() => openModal()}>
+              <div className="text">Novo Prato</div>
+              <div className="icon">
+                <FiPlusSquare size={24} />
+              </div>
+            </button>
+          </div>
+          <button type="button" onClick={signOut}>
+            <FiPower />
           </button>
-        </div>
-      </nav>
-    </header>
-  </Container>
-);
+        </nav>
+      </header>
+    </Container>
+  );
+};
 
 export default Header;

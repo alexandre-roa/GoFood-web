@@ -9,6 +9,7 @@ import ModalAddFood from '../../components/ModalAddFood';
 import ModalEditFood from '../../components/ModalEditFood';
 
 import { FoodsContainer } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 interface IFoodPlate {
   id: number;
@@ -24,6 +25,8 @@ const Dashboard: React.FC = () => {
   const [editingFood, setEditingFood] = useState<IFoodPlate>({} as IFoodPlate);
   const [modalOpen, setModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
+
+  const { restaurant } = useAuth();
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
@@ -99,7 +102,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Header openModal={toggleModal} />
+      <Header openModal={toggleModal} restaurantName={restaurant.name} />
       <ModalAddFood
         isOpen={modalOpen}
         setIsOpen={toggleModal}
