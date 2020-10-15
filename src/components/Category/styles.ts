@@ -73,11 +73,15 @@ export const Container = styled.div<IFoodPlateProps>`
 
       button {
         background: #fff;
-        padding: 10px;
-        border-radius: 8px;
-        display: flex;
-        border: none;
-        transition: 0.3s;
+        height: 56px;
+        border-radius: 10px;
+        border: 0;
+        padding: 0 16px;
+        color: #e83f5b;
+        width: 100%;
+        font-weight: 500;
+        margin-top: 16px;
+        transition: background-color 0.3s;
         svg {
           color: #3d3d4d;
         }

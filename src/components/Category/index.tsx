@@ -23,9 +23,8 @@ const Category: React.FC<IProps> = ({ category, handleDelete }: IProps) => {
 
   async function toggleAvailable(): Promise<void> {
     try {
-      await api.put(`/foods/${category.id}`, {
-        ...category,
-        available: !isAvailable,
+      await api.patch(`/foods/${category.id}/availability`, {
+        availability: !isAvailable,
       });
 
       setIsAvailable(!isAvailable);
