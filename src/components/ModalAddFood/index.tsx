@@ -7,26 +7,44 @@ import { Form } from './styles';
 import Modal from '../Modal';
 import Input from '../Input';
 
-interface IFoodPlate {
-  id: number;
-  name: string;
+interface ICategory {
+  id: string;
+  title: string;
+  restaurant_id: string;
+  available: boolean;
   image_url: string;
-  price: string;
+}
+
+interface IExtras {
+  name: string;
+  price: number;
+}
+
+interface IFood {
+  id: string;
+  title: string;
   description: string;
+  price: number;
+  image_url: string;
+  extras?: IExtras[];
+  category: ICategory;
   available: boolean;
 }
 
 interface ICreateFoodData {
-  name: string;
-  image_url: string;
-  price: string;
+  title: string;
   description: string;
+  price: number;
+  image_url: string;
+  extras?: IExtras[];
 }
 
 interface IModalProps {
   isOpen: boolean;
-  setIsOpen: () => void;
-  handleAddFood: (food: Omit<IFoodPlate, 'id' | 'available'>) => void;
+  setIsOpen: () => any;
+  handleAddFood: (
+    food: Omit<IFood, 'id' | 'available' | 'category' | 'restaurant'>,
+  ) => void;
 }
 
 const ModalAddFood: React.FC<IModalProps> = ({
@@ -48,13 +66,15 @@ const ModalAddFood: React.FC<IModalProps> = ({
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <h1>Novo Prato</h1>
-        <Input name="image" icon={FiClipboard} labelName="Cole o link aqui" />
-
-        <Input name="name" icon={FiTag} labelName="Ex: Moda Italiana" />
+        <Input
+          name="image_url"
+          icon={FiClipboard}
+          labelName="Cole o link aqui"
+        />
+        <Input name="title" icon={FiTag} labelName="Ex: Moda Italiana" />
         <Input name="price" icon={FiDollarSign} labelName="Ex: 19.90" />
-
         <Input name="description" icon={FiAlignLeft} labelName="Descrição" />
-        <button type="submit" data-testid="add-food-button">
+        <button type="submit">
           <p className="text">Adicionar Prato</p>
           <div className="icon">
             <FiCheckSquare size={24} />

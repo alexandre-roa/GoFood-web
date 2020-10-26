@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { ButtonHTMLAttributes, useCallback, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { FiEdit3, FiTrash } from 'react-icons/fi';
+import { FiTrash } from 'react-icons/fi';
 import api from '../../services/api';
 
 import { Container } from './styles';
 
-interface ICategory {
+interface ICategory extends ButtonHTMLAttributes<HTMLButtonElement> {
   id: string;
   title: string;
   restaurant_id: string;
@@ -21,6 +22,8 @@ interface IProps {
 const Category: React.FC<IProps> = ({ category, handleDelete }: IProps) => {
   const [isAvailable, setIsAvailable] = useState(category.available);
 
+  const history = useHistory();
+
   async function toggleAvailable(): Promise<void> {
     try {
       await api.patch(`/foods/${category.id}/availability`, {
@@ -33,8 +36,18 @@ const Category: React.FC<IProps> = ({ category, handleDelete }: IProps) => {
     }
   }
 
+  const handleSelectCategory = useCallback(
+    (category_id: string) => {
+      history.push(`/foods/${category_id}`);
+    },
+    [history],
+  );
+
   return (
-    <Container available={isAvailable}>
+    <Container
+      available={isAvailable}
+      onClick={() => handleSelectCategory(category.id)}
+    >
       <header>
         <img src={category.image_url} alt={category.title} />
       </header>

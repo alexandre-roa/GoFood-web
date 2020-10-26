@@ -1,22 +1,45 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { FiEdit3, FiTrash } from 'react-icons/fi';
 import api from '../../services/api';
 
 import { Container } from './styles';
 
-interface IFoodPlate {
-  id: number;
-  name: string;
-  image_url: string;
-  price: string;
-  description: string;
+interface ICategory {
+  id: string;
+  title: string;
+  restaurant_id: string;
   available: boolean;
+  image_url: string;
+}
+
+interface IRestaurant {
+  id: string;
+  name: string;
+  email: string;
+  restaurant_category: string;
+}
+
+interface IExtras {
+  name: string;
+  price: number;
+}
+
+interface IFoodPlate {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  image_url: string;
+  extras?: IExtras[];
+  category: ICategory;
+  available: boolean;
+  restaurant: IRestaurant;
 }
 
 interface IProps {
   food: IFoodPlate;
-  handleDelete: (id: number) => {};
+  handleDelete: (id: string) => {};
   handleEditFood: (food: IFoodPlate) => void;
 }
 
@@ -27,7 +50,7 @@ const Food: React.FC<IProps> = ({
 }: IProps) => {
   const [isAvailable, setIsAvailable] = useState(food.available);
 
-  async function toggleAvailable(): Promise<void> {
+  const toggleAvailable = useCallback(async (): Promise<void> => {
     try {
       await api.put(`/foods/${food.id}`, {
         ...food,
@@ -38,19 +61,19 @@ const Food: React.FC<IProps> = ({
     } catch (err) {
       console.log(err);
     }
-  }
+  }, [food, isAvailable]);
 
-  function setEditingFood(): void {
+  const setEditingFood = useCallback(() => {
     handleEditFood(food);
-  }
+  }, [food, handleEditFood]);
 
   return (
     <Container available={isAvailable}>
       <header>
-        <img src={food.image_url} alt={food.name} />
+        <img src={food.image_url} alt={food.title} />
       </header>
       <section className="body">
-        <h2>{food.name}</h2>
+        <h2>{food.title}</h2>
         <p>{food.description}</p>
         <p className="price">
           R$ <b>{food.price}</b>

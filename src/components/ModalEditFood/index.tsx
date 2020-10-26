@@ -9,7 +9,7 @@ import Input from '../Input';
 
 interface IFoodPlate {
   id: number;
-  name: string;
+  title: string;
   image_url: string;
   price: string;
   description: string;
@@ -24,7 +24,7 @@ interface IModalProps {
 }
 
 interface IEditFoodData {
-  name: string;
+  title: string;
   image_url: string;
   price: string;
   description: string;
@@ -52,7 +52,7 @@ const ModalEditFood: React.FC<IModalProps> = ({
         <h1>Editar Prato</h1>
         <Input name="image" icon={FiClipboard} labelName="Cole o link aqui" />
 
-        <Input name="name" icon={FiTag} labelName="Ex: Moda Italiana" />
+        <Input name="title" icon={FiTag} labelName="Ex: Moda Italiana" />
         <Input name="price" icon={FiDollarSign} labelName="Ex: 19.90" />
 
         <Input name="description" icon={FiAlignLeft} labelName="Descrição" />

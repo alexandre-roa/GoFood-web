@@ -103,7 +103,12 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Header openModal={toggleModal} restaurantName={restaurant.name} />
+      <Header openModal={toggleModal} restaurantName={restaurant.name}>
+        {' '}
+        <br />
+        Selecione ou crie uma categoria <br />
+        para <strong>adicionar os pratos</strong>
+      </Header>
       <ModalAddCategory
         isOpen={modalOpen}
         setIsOpen={toggleModal}

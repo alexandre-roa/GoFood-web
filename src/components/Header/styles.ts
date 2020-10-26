@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   background: #c72828;
@@ -12,11 +13,21 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    h1 {
-      color: #fff;
+    div {
+      h1 {
+        color: #fff;
 
-      strong {
-        color: #ffb84d;
+        strong {
+          color: #ffb84d;
+        }
+      }
+
+      p {
+        color: #fff;
+
+        strong {
+          color: #ffb84d;
+        }
       }
     }
 
@@ -62,4 +73,14 @@ export const Container = styled.div`
       }
     }
   }
+`;
+
+export const BackToDashboard = styled(Link).attrs({
+  to: '/',
+})`
+  text-decoration: none;
+  color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
 `;
