@@ -26,7 +26,7 @@ const Category: React.FC<IProps> = ({ category, handleDelete }: IProps) => {
 
   async function toggleAvailable(): Promise<void> {
     try {
-      await api.patch(`/foods/${category.id}/availability`, {
+      await api.patch(`/foods/${category.id}/category_availability`, {
         availability: !isAvailable,
       });
 
@@ -44,16 +44,15 @@ const Category: React.FC<IProps> = ({ category, handleDelete }: IProps) => {
   );
 
   return (
-    <Container
-      available={isAvailable}
-      onClick={() => handleSelectCategory(category.id)}
-    >
+    <Container available={isAvailable}>
       <header>
         <img src={category.image_url} alt={category.title} />
       </header>
-      <section className="body">
-        <h2>{category.title}</h2>
-      </section>
+      <button type="button" onClick={() => handleSelectCategory(category.id)}>
+        <section className="body">
+          <h2>{category.title}</h2>
+        </section>
+      </button>
       <section className="footer">
         <div className="icon-container">
           <button

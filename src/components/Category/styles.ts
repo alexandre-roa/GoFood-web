@@ -7,12 +7,6 @@ interface IFoodPlateProps {
 export const Container = styled.div<IFoodPlateProps>`
   background: #f0f0f5;
   border-radius: 8px;
-  transition: box-shadow 0.3s;
-
-  &:hover {
-    box-shadow: inset 0 0 10px #ffb84d;
-    cursor: pointer;
-  }
 
   img {
     max-width: 100%;
@@ -36,6 +30,18 @@ export const Container = styled.div<IFoodPlateProps>`
     img {
       pointer-events: none;
       user-select: none;
+    }
+  }
+
+  button {
+    border: 0;
+    align-self: center;
+    width: 100%;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: inset 0 0 24px #ffb84d;
+      cursor: pointer;
     }
   }
 

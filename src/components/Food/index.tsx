@@ -52,9 +52,8 @@ const Food: React.FC<IProps> = ({
 
   const toggleAvailable = useCallback(async (): Promise<void> => {
     try {
-      await api.put(`/foods/${food.id}`, {
-        ...food,
-        available: !isAvailable,
+      await api.patch(`/foods/${food.id}/food_availability`, {
+        availability: !isAvailable,
       });
 
       setIsAvailable(!isAvailable);
